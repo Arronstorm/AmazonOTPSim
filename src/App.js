@@ -224,11 +224,13 @@ export default function AmazonOTPVerification() {
     },
     wrapper: {
       width: '100%',
-      maxWidth: '448px'
+      maxWidth: '448px',
+      padding: '0 8px'
     },
     listWrapper: {
       width: '100%',
-      maxWidth: '800px'
+      maxWidth: '800px',
+      padding: '0 8px'
     },
     header: {
       textAlign: 'center',
@@ -339,21 +341,21 @@ export default function AmazonOTPVerification() {
       background: '#fff7ed',
       border: '2px solid #fed7aa',
       borderRadius: '8px',
-      padding: '16px',
+      padding: '12px',
       marginTop: '12px'
     },
     paymentBox: {
       background: '#f0fdf4',
       border: '2px solid #bbf7d0',
       borderRadius: '8px',
-      padding: '16px',
+      padding: '12px',
       marginTop: '12px'
     },
     paymentBoxCOD: {
       background: '#fef3c7',
       border: '2px solid #fde047',
       borderRadius: '8px',
-      padding: '16px',
+      padding: '12px',
       marginTop: '12px'
     },
     boxTitle: {
@@ -555,7 +557,7 @@ export default function AmazonOTPVerification() {
       background: 'white',
       borderRadius: '8px',
       boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      padding: '24px',
+      padding: '20px 16px',
       marginBottom: '24px'
     },
     packageIconWrapper: {
@@ -578,7 +580,7 @@ export default function AmazonOTPVerification() {
     customerInfoBox: {
       background: '#f8fafc',
       borderRadius: '6px',
-      padding: '12px',
+      padding: '10px',
       marginTop: '12px',
       borderLeft: '4px solid #f97316'
     },
@@ -586,24 +588,26 @@ export default function AmazonOTPVerification() {
       background: 'white',
       borderRadius: '8px',
       boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-      padding: '32px'
+      padding: '24px 16px'
     },
     otpInputContainer: {
       display: 'flex',
       justifyContent: 'center',
-      gap: '12px',
-      marginBottom: '24px'
+      gap: '8px',
+      marginBottom: '24px',
+      flexWrap: 'wrap'
     },
     otpInput: {
-      width: '48px',
-      height: '56px',
+      width: '40px',
+      height: '48px',
       textAlign: 'center',
-      fontSize: '24px',
+      fontSize: '20px',
       fontWeight: 'bold',
       border: '2px solid #cbd5e1',
       borderRadius: '8px',
       outline: 'none',
-      transition: 'all 0.2s'
+      transition: 'all 0.2s',
+      flex: '0 0 auto'
     },
     otpInputFocus: {
       borderColor: '#fb923c',
@@ -745,6 +749,23 @@ export default function AmazonOTPVerification() {
           @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+          }
+          
+          /* Mobile responsive styles */
+          @media (max-width: 480px) {
+            .otp-input {
+              width: 36px !important;
+              height: 44px !important;
+              font-size: 18px !important;
+            }
+          }
+          
+          @media (max-width: 360px) {
+            .otp-input {
+              width: 32px !important;
+              height: 40px !important;
+              font-size: 16px !important;
+            }
           }
         `}
       </style>
@@ -902,6 +923,7 @@ export default function AmazonOTPVerification() {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={index === 0 ? handlePaste : undefined}
+                  className="otp-input"
                   onFocus={(e) => {
                     e.target.style.borderColor = '#fb923c';
                     e.target.style.boxShadow = '0 0 0 3px rgba(251, 146, 60, 0.2)';
