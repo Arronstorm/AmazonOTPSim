@@ -1,10 +1,9 @@
-import { Check, QrCode } from 'lucide-react';
+import { Check } from 'lucide-react';
 import {
   ListWrapper,
   ListHeader,
   ListTitle,
   ListSubtitle,
-  ScannerButton,
   ProductList,
   ProductCard,
   ProductInfo,
@@ -16,7 +15,7 @@ import {
   Footer
 } from './styles/OrderList.styles';
 
-export default function OrderList({ products, onProductSelect, onOpenScanner }) {
+export default function OrderList({ products, onProductSelect }) {
   return (
     <ListWrapper>
       <ListHeader>
@@ -25,11 +24,6 @@ export default function OrderList({ products, onProductSelect, onOpenScanner }) 
           Select an order to verify delivery with OTP
         </ListSubtitle>
       </ListHeader>
-
-      <ScannerButton onClick={onOpenScanner}>
-        <QrCode size={24} />
-        Scan QR Code
-      </ScannerButton>
 
       <ProductList>
         {products.map(product => (

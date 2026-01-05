@@ -1,6 +1,6 @@
 import { OTPInputContainer, StyledOTPInput } from './styles/OTPInput.styles';
 
-export default function OTPInput({ otp, inputRefs, onOtpChange, onKeyDown, onPaste }) {
+export default function OTPInput({ otp, inputRefs, onOtpChange, onKeyDown, onPaste, disabled }) {
   return (
     <OTPInputContainer>
       {otp.map((digit, index) => (
@@ -14,6 +14,11 @@ export default function OTPInput({ otp, inputRefs, onOtpChange, onKeyDown, onPas
           onChange={(e) => onOtpChange(index, e.target.value)}
           onKeyDown={(e) => onKeyDown(index, e)}
           onPaste={index === 0 ? onPaste : undefined}
+          disabled={disabled}
+          style={{
+            opacity: disabled ? 0.5 : 1,
+            cursor: disabled ? 'not-allowed' : 'text'
+          }}
         />
       ))}
     </OTPInputContainer>

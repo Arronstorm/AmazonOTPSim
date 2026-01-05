@@ -211,8 +211,33 @@ export const ResendButton = styled.button`
   color: #ea580c;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   font-weight: 500;
+  opacity: ${props => props.disabled ? 0.5 : 1};
+`;
+
+export const ScanQRButton = styled.button`
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to right, #fb923c, #f97316);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    background: linear-gradient(to right, #f97316, #ea580c);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 export const Footer = styled.p`

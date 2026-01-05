@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Package, ArrowLeft } from 'lucide-react';
+import { Package, ArrowLeft, QrCode } from 'lucide-react';
 import Header from '../components/Header';
 import OrderList from '../components/OrderList';
 import OTPInput from '../components/OTPInput';
@@ -35,6 +35,7 @@ import {
   VerifyButton,
   ResendContainer,
   ResendButton,
+  ScanQRButton,
   Footer,
   Spinner,
   ButtonContent
@@ -47,54 +48,65 @@ export default function OTPVerificationPage() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [showScanSuccess, setShowScanSuccess] = useState(false);
   const [products, setProducts] = useState(ordersData);
+  const [qrScanned, setQrScanned] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
 
   const { otp, inputRefs, handleChange, handleKeyDown, handlePaste, resetOtp, isOtpComplete } = useOTP();
-  const { videoRef, canvasRef, startCamera, stopCamera } = useCamera();
+  const { videoRef, canvasRef, startCamera, stopCamera, scanQRCode: startQRScanning } = useCamera();
 
   const handleProductSelect = (product) => {
     setSelectedProduct(product);
     setScreen('otp');
+    setQrScanned(false);
+    setShowScanner(false);
     resetOtp();
+  };
+
+  const handleOpenScanner = () => {
+    setShowScanner(true);
+    // Start camera when opening scanner
+    setTimeout(() => {
+      startCamera().then(() => {
+        // Start real QR code scanning
+        startQRScanning((qrData) => {
+          console.log('QR Code scanned:', qrData);
+          // Verify the QR code data matches the order (you can customize this validation)
+          playBeepSound();
+          setShowScanSuccess(true);
+
+          setTimeout(() => {
+            setShowScanSuccess(false);
+            stopCamera();
+            setQrScanned(true);
+            setShowScanner(false);
+          }, 1500);
+        });
+      }).catch(err => {
+        console.error('Failed to start camera:', err);
+        setShowScanner(false);
+      });
+    }, 100);
   };
 
   const handleBackToList = () => {
     setScreen('list');
     setSelectedProduct(null);
+    setQrScanned(false);
+    setShowScanner(false);
+    stopCamera();
     resetOtp();
-  };
-
-  const handleOpenScanner = () => {
-    setScreen('scanner');
-    startCamera().then(() => {
-      scanQRCode();
-    }).catch(err => {
-      console.error('Failed to start camera:', err);
-      setScreen('list');
-    });
   };
 
   const handleCloseScanner = () => {
     stopCamera();
-    setScreen('list');
+    setShowScanner(false);
+    if (!qrScanned) {
+      // If QR not scanned yet, go back to list
+      setScreen('list');
+      setSelectedProduct(null);
+    }
   };
 
-  const scanQRCode = () => {
-    setTimeout(() => {
-      const simulatedOrderId = 'ORD-2024-003';
-      const product = products.find(p => p.orderId === simulatedOrderId);
-      if (product && !product.verified) {
-        playBeepSound();
-        setShowScanSuccess(true);
-
-        setTimeout(() => {
-          setShowScanSuccess(false);
-          stopCamera();
-          setSelectedProduct(product);
-          setScreen('otp');
-        }, 1500);
-      }
-    }, 2000);
-  };
 
   const handleVerify = () => {
     const otpValue = otp.join('');
@@ -121,10 +133,10 @@ export default function OTPVerificationPage() {
   };
 
   useEffect(() => {
-    if (screen === 'otp') {
+    if (screen === 'otp' && qrScanned) {
       inputRefs.current[0]?.focus();
     }
-  }, [screen, inputRefs]);
+  }, [screen, qrScanned, inputRefs]);
 
   return (
     <Container>
@@ -134,7 +146,6 @@ export default function OTPVerificationPage() {
           <OrderList
             products={products}
             onProductSelect={handleProductSelect}
-            onOpenScanner={handleOpenScanner}
           />
         </div>
       )}
@@ -195,17 +206,30 @@ export default function OTPVerificationPage() {
           </div>
 
           <OTPCard>
+            {!qrScanned ? (
+              <>
+                <div style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#f97316', fontWeight: '500' }}>
+                  Please scan the QR code to enable OTP entry
+                </div>
+                <ScanQRButton onClick={handleOpenScanner}>
+                  <QrCode size={24} />
+                  Scan QR Code
+                </ScanQRButton>
+              </>
+            ) : null}
+
             <OTPInput
               otp={otp}
               inputRefs={inputRefs}
               onOtpChange={handleChange}
               onKeyDown={handleKeyDown}
               onPaste={handlePaste}
+              disabled={!qrScanned}
             />
 
             <VerifyButton
               onClick={handleVerify}
-              disabled={!isOtpComplete || isVerifying}
+              disabled={!isOtpComplete || isVerifying || !qrScanned}
             >
               {isVerifying ? (
                 <ButtonContent>
@@ -221,21 +245,21 @@ export default function OTPVerificationPage() {
             </VerifyButton>
 
             <ResendContainer>
-              <ResendButton>Resend Code</ResendButton>
+              <ResendButton disabled={!qrScanned}>Resend Code</ResendButton>
             </ResendContainer>
           </OTPCard>
 
+          {showScanner && (
+            <QRScanner
+              videoRef={videoRef}
+              canvasRef={canvasRef}
+              showScanSuccess={showScanSuccess}
+              onClose={handleCloseScanner}
+            />
+          )}
+
           <Footer>Secure verification powered by Amazon</Footer>
         </Wrapper>
-      )}
-
-      {screen === 'scanner' && (
-        <QRScanner
-          videoRef={videoRef}
-          canvasRef={canvasRef}
-          showScanSuccess={showScanSuccess}
-          onClose={handleCloseScanner}
-        />
       )}
 
       {showSuccess && selectedProduct && (
