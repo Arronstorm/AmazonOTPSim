@@ -2,81 +2,42 @@ export const ordersData = [
   {
     id: 1,
     orderId: 'ORD-2024-001',
-    customerName: 'Rajesh Kumar',
-    address: '123, MG Road, Bangalore - 560001',
+    customerName: 'Richu Saji',
+    address: 'Mullanil House, kochukoikal PO, Seethathodu, Pathanamthitta, Kerala 689667',
     verified: false,
-    quantity: 3,
+    quantity: 7,
     items: [
-      'Apple iPhone 15 Pro Max',
-      'AirPods Pro (2nd Gen)',
-      'Apple Watch Series 9'
+      'Younik Short Kurti White - XS',
+      'Alps Goodness Methi(50 gm)',
+      'Alps Goodness Amla Reetha & Shikakai(50 gm)',
+      'JOKER & WITCH Women Dial & Reset Time Digital Watch AMWW982',
+      'SALTY Moorish Black Bracelet',
+      'SALTY Midnight Enchantress Necklace',
+      'Birthday Card for You - Happy Birthday Balloons with Custom Picture'
     ],
-    paymentMethod: 'Credit Card',
+    paymentMethod: 'UPI - PhonePe',
     paymentStatus: 'Prepaid',
-    amount: '₹1,89,900'
+    amount: '₹1,000'
   },
   {
     id: 2,
     orderId: 'ORD-2024-002',
-    customerName: 'Priya Sharma',
-    address: '45, Anna Nagar, Chennai - 600040',
+    customerName: 'Richu Saji',
+    address: 'Mullanil House, kochukoikal PO, Seethathodu, Pathanamthitta, Kerala 689667',
     verified: false,
-    quantity: 2,
+    quantity: 8,
     items: [
-      'Sony WH-1000XM5 Headphones',
-      'Kindle Paperwhite 11th Gen'
+      'MARS Fabulash Volumising Mascara',
+      'Minimalist B12 + Repair Complex 5.5% Face Moisturizer 10 gm',
+      'Simple Kind To Skin Refreshing Face Wash (100 ml)',
+      'Aqualogica Glow+ Dewy Lightweight Sunscreen Gel SPF 50+ PA++++ with Papaya & Vitamin C (50 ml)',
+      'Good Vibes Ubtan Super Light Gel Moisturiser',
+      'Minimalist 10% Niacinamide face Serum with Matmarine + Zinc + Acetyl Glucosamine',
+      'Minimalist Vitamin K + Retinal 01% Eye Cream for under-eye dark circles',
+      'Minimalist Retinol 0.3% face serum with Coenzyme Q10 +bakuchiol oi + squalane'
     ],
-    paymentMethod: 'Cash on Delivery',
-    paymentStatus: 'To be Paid',
-    amount: '₹41,989'
-  },
-  {
-    id: 3,
-    orderId: 'ORD-2024-003',
-    customerName: 'Amit Patel',
-    address: '78, FC Road, Pune - 411004',
-    verified: false,
-    quantity: 5,
-    items: [
-      'Samsung Galaxy Watch 6',
-      'Samsung Galaxy Buds 2 Pro',
-      'Samsung 65" 4K Smart TV',
-      'Samsung Soundbar HW-Q700B',
-      'Fire TV Stick 4K'
-    ],
-    paymentMethod: 'UPI',
+    paymentMethod: 'UPI - PhonePe',
     paymentStatus: 'Prepaid',
-    amount: '₹1,24,995'
-  },
-  {
-    id: 4,
-    orderId: 'ORD-2024-004',
-    customerName: 'Sneha Reddy',
-    address: '12, Banjara Hills, Hyderabad - 500034',
-    verified: false,
-    quantity: 1,
-    items: [
-      'Dell XPS 15 Laptop'
-    ],
-    paymentMethod: 'Debit Card',
-    paymentStatus: 'Prepaid',
-    amount: '₹1,89,990'
-  },
-  {
-    id: 5,
-    orderId: 'ORD-2024-005',
-    customerName: 'Vikram Singh',
-    address: '56, Connaught Place, New Delhi - 110001',
-    verified: false,
-    quantity: 4,
-    items: [
-      'Canon EOS R6 Camera',
-      'Canon RF 24-70mm f/2.8L Lens',
-      'SanDisk 128GB SD Card',
-      'Manfrotto Camera Tripod'
-    ],
-    paymentMethod: 'Cash on Delivery',
-    paymentStatus: 'To be Paid',
-    amount: '₹3,24,500'
+    amount: '₹1,500'
   }
 ];
