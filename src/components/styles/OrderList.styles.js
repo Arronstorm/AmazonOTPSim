@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ListWrapper = styled.div`
   width: 100%;
   max-width: 800px;
-  padding: 0 8px;
 `;
 
 export const ListHeader = styled.div`

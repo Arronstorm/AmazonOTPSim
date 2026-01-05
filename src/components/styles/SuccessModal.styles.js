@@ -86,7 +86,7 @@ export const SuccessText = styled.p`
 export const CustomerInfoBox = styled.div`
   background: #f8fafc;
   border-radius: 6px;
-  padding: 10px;
+  padding: 12px 12px 12px 8px;
   margin-top: 12px;
   border-left: 4px solid #f97316;
   margin-bottom: 16px;

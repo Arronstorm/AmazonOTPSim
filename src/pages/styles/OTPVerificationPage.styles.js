@@ -43,8 +43,12 @@ export const InfoCard = styled.div`
   background: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 20px 16px;
+  padding: 20px;
   margin-bottom: 24px;
+
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
 `;
 
 export const PackageIconWrapper = styled.div`
@@ -69,7 +73,7 @@ export const Subtitle = styled.p`
 export const CustomerInfoBox = styled.div`
   background: #f8fafc;
   border-radius: 6px;
-  padding: 10px;
+  padding: 12px 12px 12px 8px;
   margin-top: 12px;
   border-left: 4px solid #f97316;
 `;
